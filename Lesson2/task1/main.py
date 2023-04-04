@@ -1,9 +1,8 @@
-length = int(input('Enter length of input: '))
+length = int(input('Enter length of something: '))
 
 while(True):
-    userInput = input('Enter something: ')
-    if len(userInput) == length: 
-        print("You've entered correct length something!")
+    userSomething = input(f"Enter something with length {length}: ")
+    if len(userSomething) == length:
+        element = userSomething.count(input('Enter element to count him:'))
+        print(f"Element count of you asked in your list = {element}")
         break
-    print(f"Oops... Length of your input is {len(userInput)}, you asked for " 
-          f"{length} length. So the difference = {length - len(userInput)}")
