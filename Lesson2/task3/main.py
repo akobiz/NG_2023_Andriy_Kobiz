@@ -1,7 +1,15 @@
-lst1, lst2, lst3 = input('First pack: '), input('Second pack: '), input('Third pack: ')
+from random import randint
 
-unqLst1 = set([each for each in lst1 if lst1.count(each) > 1])
-unqLst2 = set([each for each in lst2 if lst2.count(each) > 1])
-unqLst3 = set([each for each in lst3 if lst3.count(each) > 1])
+lists = []
+nunqLists = []
 
-print(f"Non-unique elements from each packs:\n{unqLst1}\n{unqLst2}\n{unqLst3}")
+for each in range(255):
+    lists.append([])
+    nunqLists.append([])
+
+for each in range(len(lists)):
+    lists[each] = [randint(0, 6) for _ in range(5)]
+    nunqLists[each] = list(set([elem for elem in lists[each] if lists[each].count(elem) > 1]))
+
+print(f"{lists}\n\n\n{nunqLists}")
+
