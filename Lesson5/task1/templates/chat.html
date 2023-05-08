@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chat!</title>
+</head>
+<body>
+    {% for message in messages %}
+    <p1>{{ message }}</p1>
+    <br>
+    {% endfor %}
+    <form action="/chat", method="post">
+        <input type="text" placeholder="Enter your message" name="message">
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>
