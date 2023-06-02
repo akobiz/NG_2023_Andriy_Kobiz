@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit News</title>
+</head>
+<body>
+    <form action="/sendNews", method="post">
+    <label name="id" >ID: {{ news[0] }}</label>
+    <input type="hidden", name="id", value="{{news[0]}}">
+    <label>Title</label>
+    <input type="text", name="title", value={{news[1]}}>
+    <label>Author</label>
+    <input type="text", name="author", value="{{news[2]}}">
+    <label>News</label>
+    <input type="text", name='news', value="{{news[4]}}"><br>
+    {% if adding %}
+        <button type="submit", name="action", value="add">ADD NEWS</button>
+    {% else %}
+        <button type="submit", name="action", value="update">UPDATE</button>
+        <button type="submit", name="action", value="delete">DELETE</button>
+    {% endif %}
+</form>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>News</title>
+</head>
+<body>
+    <form action="/edit", method="get">
+        <button type="submit", name="add">ADD NEWS</button>
+    </form><br><br>
+
+    <form action="/", method="post">
+    {% for n in range(0, len) %}
+        <h1>{{ news[n][0] }} {{ news[n][1] }}</h1>
+        {{ news[n][2] }}
+        {{ news[n][3] }}
+        <p>{{ news[n][4] }}</p>
+        <button type="submit" name="news_id" value={{n}}>EDIT</button>
+        <hr>  
+    {%endfor%}
+    </form>
+</body>
+</html>
