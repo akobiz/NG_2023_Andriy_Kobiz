@@ -1,5 +1,6 @@
 from uuid import uuid4
 from os import path, listdir, remove as rm
+from werkzeug.security import generate_password_hash, check_password_hash
 
 def generateVideoURL():
     return (uuid4().hex)
@@ -27,3 +28,9 @@ def clearNoExistingVideos(videos, uploadPath):
             print(e)
     
     return notExistingVideos
+
+def hashPass(password):
+    return generate_password_hash(password)
+
+def checkPassValid(hashPsw, psw):
+    return check_password_hash(hashPsw, psw)

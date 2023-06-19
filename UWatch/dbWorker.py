@@ -22,6 +22,24 @@ def checkVideos(uploadPath):
             db.session.commit()
             print("Video deleted:" + vid)
 
+def getUser(email):
+    return Users.query.filter_by(email=email).first()
+
+def getUserID(user_id):
+    return Users.query.get(int(user_id))
+
+def checkUserPassword(email):
+    return Users.query.filter_by(email=email).with_entities(Users.password).first()
+
+def checkUserExists(email):
+    if Users.query.filter_by(email=email).first():
+        return True
+    else:
+        return False
+
+def addUser(email, password, channel='Andrew'):
+    db.session.add(Users(email, channel, password))
+    db.session.commit()
 
 def takeVideos():
     return Videos.query.all()

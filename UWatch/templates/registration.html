@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block content %} 
+    <form action="/sign/registration" method="post">
+        <input type="email" id="email" name="email" placeholder="example@example.com">
+        <input type="password" id="psw" name="psw" placeholder="Type password">
+        <input type="password" id="psw_check" name="psw_check" placeholder="Type password again">
+        <button type="submit" id="btn" name="btn" value="reg">REGISTER</button>
+    </form>
+{% endblock %}

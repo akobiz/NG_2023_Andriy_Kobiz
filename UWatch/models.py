@@ -1,4 +1,21 @@
 from dbWorker import db
+from flask_login import UserMixin
+
+class Users(UserMixin, db.Model):
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True)
+    channel_name = db.Column(db.String(45), unique=True)
+    password = db.Column(db.String(100))
+
+    def __init__(self, email, channel_name, password):
+        self.email = email
+        self.channel_name = channel_name
+        self.password = password
+
+    def __repr__(self):
+        return f"Email: {self.email}, Channel Name: {self.channel_name}, Password: {self.password}"
 
 class Videos(db.Model):
     __tablename__ = 'videos'
