@@ -131,6 +131,7 @@ dmypy.json
 
 # media
 *.mp4
+*.jpg
 
 # db
 *.db

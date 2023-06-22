@@ -38,7 +38,7 @@ def upload():
 
 @app.route('/playback/<string:url>')
 def playback(url):
-    return render_template('playback.html')
+    return render_template('playback.html', url='uploads/' + url + '.mp4', poster='uploads/' + url + '.jpg')
 
 @app.route('/sign', methods=['GET', 'POST'])
 def sign():
