@@ -5,7 +5,8 @@
     <style> .video{width: 15px; height: 15px; display: block;}</style>
 </head>
 <div class="video">
-    <video autoplay="autoplay" controls="controls" preload="preload" autoplay poster="{{ url_for('static', filename=poster)}}" width="750px">
+    <video autoplay="autoplay" controls="controls" preload="preload" autoplay {% if poster %}
+     poster="{{ url_for('static', filename=poster)}}" {% endif %} width="750px">
         <source src="{{ url_for('static', filename=url) }}" type="video/mp4"></source>
     </video>
 {% endblock %}

@@ -30,15 +30,24 @@ def upload():
         file = request.files['file']
         if file.filename.endswith('.mp4'):
             url = generateVideoURL()
+            video_name = request.form['name']
+            poster = request.files['poster']
+            if poster.filename.endswith('.jpg'):
+                poster.save(generateVideoPath(app.config['UPLOAD_FOLDER'], url + '.jpg'))
             file.save(generateVideoPath(app.config['UPLOAD_FOLDER'], url + '.mp4'))
-            dbw.addVideo(url)
+            dbw.addVideo(url, video_name=video_name, fk_user_id=current_user.id)
         return redirect('/')
     elif request.method == 'GET':
+        print(current_user.id)
         return render_template('upload.html')
 
 @app.route('/playback/<string:url>')
 def playback(url):
-    return render_template('playback.html', url='uploads/' + url + '.mp4', poster='uploads/' + url + '.jpg')
+    poster = 'uploads/' + url + '.jpg'
+    url = 'uploads/' + url + '.mp4'
+    if checkPathIsValid(poster):
+        return render_template('playback.html', url=url, poster=poster)
+    return render_template('playback.html', url=url)
 
 @app.route('/sign', methods=['GET', 'POST'])
 def sign():

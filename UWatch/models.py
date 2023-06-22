@@ -8,6 +8,7 @@ class Users(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     channel_name = db.Column(db.String(45), unique=True)
     password = db.Column(db.String(100))
+    videos = db.relationship('Videos', backref='user', lazy=True)
 
     def __init__(self, email, channel_name, password):
         self.email = email
@@ -21,17 +22,20 @@ class Videos(db.Model):
     __tablename__ = 'videos'
 
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), name='fk_user_id')
     video_url = db.Column(db.String(15), unique=True, nullable=False)
+    video_name = db.Column(db.String(45), nullable=False)
     like = db.Column(db.Integer, nullable=False)
     dislike = db.Column(db.Integer, nullable=False)
     views = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, video_url, like, dislike, views):
+    def __init__(self, user_id, video_url, video_name, like, dislike, views):
+        self.user_id = user_id
         self.video_url = video_url
+        self.video_name = video_name
         self.like = like
         self.dislike = dislike
         self.views = views
 
     def __repr__(self):
-        repre = []
         return str([self.id, self.video_url, self.like, self.dislike, self.views])

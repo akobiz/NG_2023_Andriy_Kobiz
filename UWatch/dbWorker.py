@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from commands import clearNoExistingVideos
+from datetime import datetime
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -44,6 +45,9 @@ def addUser(email, password, channel='Andrew'):
 def takeVideos():
     return Videos.query.all()
 
-def addVideo(url, like=0, dislike=0, views=0):
-    db.session.add(Videos(url, like, dislike, views))
+def addVideo(url, fk_user_id, video_name, like=0, dislike=0, views=0):
+    if video_name == "": 
+        video_name = datetime.now().date()
+        
+    db.session.add(Videos(fk_user_id, url, video_name, like, dislike, views))
     db.session.commit()

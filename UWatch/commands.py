@@ -34,3 +34,6 @@ def hashPass(password):
 
 def checkPassValid(hashPsw, psw):
     return check_password_hash(hashPsw, psw)
+
+def checkPathIsValid(pth):
+    return path.exists('static/' + pth)
