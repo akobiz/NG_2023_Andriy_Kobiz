@@ -48,6 +48,6 @@ def takeVideos():
 def addVideo(url, fk_user_id, video_name, like=0, dislike=0, views=0):
     if video_name == "": 
         video_name = datetime.now().date()
-        
+
     db.session.add(Videos(fk_user_id, url, video_name, like, dislike, views))
     db.session.commit()

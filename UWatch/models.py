@@ -9,8 +9,8 @@ class Users(UserMixin, db.Model):
     channel_name = db.Column(db.String(45), unique=True)
     password = db.Column(db.String(100))
 
-    videos = db.relationship('Videos', backref='user', lazy=True)
-    comments = db.relationship('Comments', backref='user', lazy=True)
+    #videos = db.relationship('Videos', backref='author', lazy=True)
+    #comments = db.relationship('Comments', backref='user', lazy=True)
 
     def __init__(self, email, channel_name, password):
         self.email = email
@@ -31,7 +31,7 @@ class Videos(db.Model):
     dislike = db.Column(db.Integer, nullable=False)
     views = db.Column(db.Integer, nullable=False)
 
-    comments = db.relationship('Comments', backref='video', lazy=True)
+    #comments = db.relationship('Comments', backref='video', lazy=True)
 
     def __init__(self, user_id, video_url, video_name, like, dislike, views):
         self.user_id = user_id
@@ -52,8 +52,8 @@ class Comments(db.Model):
     video_url = db.Column(db.String(15), db.ForeignKey('videos.video_url'), nullable=False)
     comment = db.Column(db.Text)
 
-    user = db.relationship('Users', backref='comments')
-    video = db.relationship('Videos', backref='comments')
+    user = db.relationship('Users', backref='user_comments')
+    video = db.relationship('Videos', backref='videos_comments')
 
     def __init__(self, user_id, video_url, comment):
         self.user_id = user_id

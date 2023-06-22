@@ -18,8 +18,8 @@ def user_loader(user_id):
 
 @app.route('/')
 def index():
-    t = dbw.takeVideos()
-    return render_template('index.html', t=t)
+    videos = dbw.takeVideos()
+    return render_template('index.html', videos=videos)
 
 @app.route('/upload', methods=['GET','POST'])
 @login_required
@@ -32,9 +32,12 @@ def upload():
             url = generateVideoURL()
             video_name = request.form['name']
             poster = request.files['poster']
+            file.save(generateVideoPath(app.config['UPLOAD_FOLDER'], url + '.mp4'))
             if poster.filename.endswith('.jpg'):
                 poster.save(generateVideoPath(app.config['UPLOAD_FOLDER'], url + '.jpg'))
-            file.save(generateVideoPath(app.config['UPLOAD_FOLDER'], url + '.mp4'))
+            else:
+                generatePreview(url, app.config['UPLOAD_FOLDER'])
+
             dbw.addVideo(url, video_name=video_name, fk_user_id=current_user.id)
         return redirect('/')
     elif request.method == 'GET':
@@ -57,7 +60,7 @@ def sign():
             password = request.form['password']
             if dbw.checkUserExists(email) and checkPassValid(dbw.checkUserPassword(email)[0], password):
                 login_user(dbw.getUser(email))
-        return redirect('/sign')
+        return redirect('/')
     return render_template('sign.html')
 
 @app.route('/sign/registration', methods=['GET', 'POST'])
@@ -81,6 +84,6 @@ def logout():
     return redirect('/')
 
 if __name__ == "__main__":
-    with app.app_context():
-        print(dbw.checkVideos(app.config['UPLOAD_FOLDER']))
+    #with app.app_context():
+        #dbw.checkVideos(app.config['UPLOAD_FOLDER'])
     app.run(host='0.0.0.0', port=5050)

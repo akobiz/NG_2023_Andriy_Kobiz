@@ -1,6 +1,7 @@
 from uuid import uuid4
 from os import path, listdir, remove as rm
 from werkzeug.security import generate_password_hash, check_password_hash
+import cv2
 
 def generateVideoURL():
     return (uuid4().hex)
@@ -28,6 +29,20 @@ def clearNoExistingVideos(videos, uploadPath):
             print(e)
     
     return notExistingVideos
+
+def generatePreview(video, folder):
+    print(video)
+    openVideo = cv2.VideoCapture(folder + video + '.mp4')
+    openVideo.set(cv2.CAP_PROP_POS_MSEC, 5*1000)
+
+    success, frame = openVideo.read()
+    
+    if not success:
+        print(video + ': have not created thumbnail for video.')
+
+    frame = cv2.resize(frame, (450, 325))
+    cv2.imwrite(folder + video + '.jpg', frame)
+    openVideo.release()
 
 def hashPass(password):
     return generate_password_hash(password)
