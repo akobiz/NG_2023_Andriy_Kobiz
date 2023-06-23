@@ -2,6 +2,7 @@ from uuid import uuid4
 from os import path, listdir, remove as rm
 from werkzeug.security import generate_password_hash, check_password_hash
 import cv2
+import random
 
 def generateVideoURL():
     return (uuid4().hex)
@@ -52,3 +53,6 @@ def checkPassValid(hashPsw, psw):
 
 def checkPathIsValid(pth):
     return path.exists('static/' + pth)
+
+def randomizeVideos(videos):
+    random.shuffle(videos)
