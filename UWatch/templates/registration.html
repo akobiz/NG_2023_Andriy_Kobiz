@@ -1,9 +1,36 @@
 {% extends "index.html" %}
 {% block content %} 
-    <form action="/sign/registration" method="post">
-        <input type="email" id="email" name="email" placeholder="example@example.com">
-        <input type="password" id="psw" name="psw" placeholder="Type password">
-        <input type="password" id="psw_check" name="psw_check" placeholder="Type password again">
-        <button type="submit" id="btn" name="btn" value="reg">REGISTER</button>
+    <form action="" id="form1" method="post">
+        <input type="email" name="email" placeholder="example@example.com">
+        <input type="password" name="psw" placeholder="Type password">
+        <input type="password" name="psw_check" placeholder="Type password again">
+        <button onclick="addInput()" id="continue">CONTINUE</button>
     </form>
+    <form action="" id="form2" style="display: none;" method="post">
+        <input type="text" name="channel" id="channel" placeholder="Your name of channel">
+        <button type="submit" name="btn" id="btn" value="reg">REGISTER</button>
+    </form>
+
+    <script>
+        var submitButton = document.getElementById("continue");
+        submitButton.addEventListener("click", function(event) {
+        event.preventDefault(); 
+        })
+        
+        function addInput() {
+
+            var form1 = document.getElementById("form1");
+            var form2 = document.getElementById("form2");
+            
+            var email = form1.elements["email"].value;
+            var password = form1.elements["psw"].value;
+            var password_check = form1.elements["psw_check"].value;
+            
+            form2.innerHTML += '<input type="hidden" name="email" id="email" value="' + email + '">';
+            form2.innerHTML += '<input type="hidden" name="psw" id="psw" value="' + password + '">';
+            form2.innerHTML += '<input type="hidden" name="psw_check" id="psw_check" value="' + password_check + '">';
+            form1.style.display= "none";
+            form2.style.display= "block";
+        }
+    </script>
 {% endblock %}
