@@ -34,7 +34,7 @@ def clearNoExistingVideos(videos, uploadPath):
 def generatePreview(video, folder):
     print(video)
     openVideo = cv2.VideoCapture(folder + video + '.mp4')
-    openVideo.set(cv2.CAP_PROP_POS_MSEC, 5*1000)
+    openVideo.set(cv2.CAP_PROP_POS_MSEC, 2*1000)
 
     success, frame = openVideo.read()
     

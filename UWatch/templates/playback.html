@@ -1,9 +1,12 @@
 {% extends "index.html" %}
-{% block content %}
-<head>
-    <title>hello</title>
-    <style> .video{width: 15px; height: 15px; display: block;}</style>
-</head>
+{% block meta %}
+    <meta property="og:title" content="{{ url }}">
+    <meta property="og:description" content="{{ description }}">
+    {% set image_path = url_for('static', filename=poster).replace('/playback/' + url, '') %}
+    <meta property="og:image" content="{{ image_path }}">
+{% endblock %}
+
+{% block content %} 
 <div class="video">
     <video autoplay="autoplay" controls="controls" preload="preload" {% if poster %}
      poster="{{ url_for('static', filename=poster)}}" {% endif %} width="750px" height="450px">
@@ -11,7 +14,7 @@
     </video>
     <p>{{ description }}</p>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br>
 <div class="comments" style="display: grid; right: inherit;">
     {% if current_user.is_authenticated %}
         <form action="/leaveComment" id="form" method="post">

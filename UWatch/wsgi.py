@@ -19,9 +19,7 @@ def user_loader(user_id):
 @app.route('/')
 def index():
     videos = dbw.takeVideos()
-    print(videos)
     randomizeVideos(videos)
-    print(videos)
     return render_template('index.html', videos=videos)
 
 @app.route('/upload', methods=['GET','POST'])
