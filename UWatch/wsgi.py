@@ -32,13 +32,14 @@ def upload():
             url = generateVideoURL()
             video_name = request.form['name']
             poster = request.files['poster']
+            description = request.form['descr']
             file.save(generateVideoPath(app.config['UPLOAD_FOLDER'], url + '.mp4'))
             if poster.filename.endswith('.jpg'):
                 poster.save(generateVideoPath(app.config['UPLOAD_FOLDER'], url + '.jpg'))
             else:
                 generatePreview(url, app.config['UPLOAD_FOLDER'])
 
-            dbw.addVideo(url, video_name=video_name, fk_user_id=current_user.id)
+            dbw.addVideo(url, video_name=video_name, fk_user_id=current_user.id, description=description)
         return redirect('/')
     elif request.method == 'GET':
         print(current_user.id)
@@ -48,19 +49,19 @@ def upload():
 def playback(url):
     poster = 'uploads/' + url + '.jpg'
     comments = dbw.takeCommentsFromVideo(url)
+    description = dbw.takeDescriptionFromVideo(url)
     url = 'uploads/' + url + '.mp4'
-    print(comments)
     if checkPathIsValid(poster):
-        return render_template('playback.html', url=url, poster=poster, comments=comments)
-    return render_template('playback.html', url=url, comments=comments)
+        return render_template('playback.html', url=url, poster=poster, comments=comments, description=description.description)
+    return render_template('playback.html', url=url, comments=comments, description=description.description)
 
 @app.route('/leaveComment', methods=['POST'])
 def leaveComment():
     id = request.form['user']
     url = request.form['url'][8:-4]
     comment = request.form['comment']
-    print(id, url, comment)
-    dbw.addComment(id, url, comment)
+    if comment != "":
+        dbw.addComment(id, url, comment)
     return redirect('/playback/' + url)
 
 @app.route('/sign', methods=['GET', 'POST'])

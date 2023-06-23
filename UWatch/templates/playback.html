@@ -9,8 +9,9 @@
      poster="{{ url_for('static', filename=poster)}}" {% endif %} width="750px" height="450px">
         <source src="{{ url_for('static', filename=url) }}" type="video/mp4"></source>
     </video>
+    <p>{{ description }}</p>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="comments" style="display: grid; right: inherit;">
     {% if current_user.is_authenticated %}
         <form action="/leaveComment" id="form" method="post">
@@ -24,12 +25,10 @@
     {% endif %}
     <div id="commentContainer">
         {% for comment in comments %}
-            {{ comment.user_id }}
+            {{ comment.user.channel_name }} {{ comment.date }} <br>
             {{ comment.comment }}
+            <hr>
         {% endfor %}
     </div>
 </div>
 {% endblock %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-</script>

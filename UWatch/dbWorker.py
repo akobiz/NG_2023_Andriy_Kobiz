@@ -45,16 +45,19 @@ def addUser(email, password, channel):
 def takeVideos():
     return Videos.query.all()
 
-def addVideo(url, fk_user_id, video_name, like=0, dislike=0, views=0):
+def addVideo(url, fk_user_id, video_name, description, like=0, dislike=0, views=0):
     if video_name == "": 
         video_name = datetime.now().date()
 
-    db.session.add(Videos(fk_user_id, url, video_name, like, dislike, views))
+    db.session.add(Videos(fk_user_id, url, video_name, like, dislike, views, description))
     db.session.commit()
 
 def addComment(user_id, video_url, comment):
-    db.session.add(Comments(user_id, video_url, comment))
+    db.session.add(Comments(user_id, video_url, comment, datetime.now().ctime()))
     db.session.commit()
+
+def takeDescriptionFromVideo(video_url):
+    return Videos.query.filter_by(video_url=video_url).first()
 
 def takeCommentsFromVideo(video_url):
     return Comments.query.filter_by(video_url=video_url).all()

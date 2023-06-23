@@ -30,16 +30,18 @@ class Videos(db.Model):
     like = db.Column(db.Integer, nullable=False)
     dislike = db.Column(db.Integer, nullable=False)
     views = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.Text)
 
     #comments = db.relationship('Comments', backref='video', lazy=True)
 
-    def __init__(self, user_id, video_url, video_name, like, dislike, views):
+    def __init__(self, user_id, video_url, video_name, like, dislike, views, description):
         self.user_id = user_id
         self.video_url = video_url
         self.video_name = video_name
         self.like = like
         self.dislike = dislike
         self.views = views
+        self.description = description
 
     def __repr__(self):
         return str([self.id, self.video_url, self.like, self.dislike, self.views])
@@ -51,11 +53,13 @@ class Comments(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     video_url = db.Column(db.String(15), db.ForeignKey('videos.video_url'), nullable=False)
     comment = db.Column(db.Text)
+    date = db.Column(db.String(15))
 
     user = db.relationship('Users', backref='user_comments')
     video = db.relationship('Videos', backref='videos_comments')
 
-    def __init__(self, user_id, video_url, comment):
+    def __init__(self, user_id, video_url, comment, date):
         self.user_id = user_id
         self.video_url = video_url
         self.comment = comment
+        self.date = date
