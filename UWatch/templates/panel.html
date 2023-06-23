@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{% block content %}
+    {% for video in videos %}
+        <div class="video_manager">
+                <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="75px" height="85px">
+                <h3>{{ video.video_name }}</h3>
+                <form action="/panel/{{ video.video_url }}" method="post">
+                    <input type="hidden" name="url" id="url" value="{{ video.video_url }}">
+                    <input type="hidden" name="name" id="name" value="{{ video.video_name }}">
+                    <input type="hidden" name="descr" id="descr" value="{{ video.description }}">
+                    <button type="submit" name="action" id="action" value="edit">EDIT VIDEO INFO</button>
+                </form>
+                <form action="/panel/delete", method="post">
+                    <input type="hidden" name="url" id="url" value="{{ video.video_url }}">
+                    <button type="submit" name="action" id="action" value="delete">DELETE VIDEO</button>
+                </form>
+        </div>
+    {% endfor %}
+{% endblock %}

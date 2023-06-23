@@ -22,6 +22,34 @@ def index():
     randomizeVideos(videos)
     return render_template('index.html', videos=videos)
 
+@app.route('/panel/<string:url>', methods=['GET', 'POST'])
+@login_required
+def edit(url):
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['descr']
+        if 'file' in request.files:
+            file = request.files['file']
+            if file.filename.endswith('.jpg'):
+                file.save(generateVideoPath(app.config["UPLOAD_FOLDER"] + url + '.jpg'))
+            dbw.editVideo(url, name, description)
+        return redirect('/panel')
+    return render_template('editing.html')
+
+@app.route('/panel/delete', methods=['POST'])
+@login_required
+def delete():
+    if request.form['action'] == 'delete':
+        dbw.deleteVideo(request.form['url'])
+    return redirect('/panel')
+
+@app.route('/panel')
+@login_required
+def panel():
+    videos = dbw.takeVideosFromUser(current_user.id)
+    print(videos)
+    return render_template('panel.html', videos=videos)
+
 @app.route('/upload', methods=['GET','POST'])
 @login_required
 def upload():
@@ -88,7 +116,8 @@ def registration():
 
             if not dbw.checkUserExists(email) and psw == psw_check:
                 dbw.addUser(email, hashPass(psw), channel_name)
-            else: print("EXISTS")
+            else: 
+                print("EXISTS")
             return redirect('/sign')
     return render_template('registration.html')
 

@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block content %}
+    <form action="/panel/edit" method="post">
+        <input type="file" name="poster" autocomplete="off"> <br><br>
+		<input type="text" name="name" id="name" placeholder="Enter name of video">
+		<input type="text" name="descr" id="descr" placeholder="Description to video" height="35px">
+        <button type="submit">APPLY CHANGES</button>
+    </form>
+{% endblock %}

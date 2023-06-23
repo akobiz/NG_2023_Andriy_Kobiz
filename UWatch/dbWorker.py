@@ -38,12 +38,24 @@ def checkUserExists(email):
     else:
         return False
 
-def addUser(email, password, channel):
-    db.session.add(Users(email, channel, password))
+def addUser(email, password, channel_name):
+    db.session.add(Users(email, channel_name, password))
     db.session.commit()
 
 def takeVideos():
     return Videos.query.all()
+
+def editVideo(video_url, name, description):
+    record = Videos.query.filter_by(video_url=video_url).first()
+
+    if record is not None:
+        record.video_name = name
+        record.description = description
+        db.session.commit()
+
+def deleteVideo(video_url):
+    db.session.delete(Videos.query.filter_by(video_url=video_url).first())
+    db.session.commit()
 
 def addVideo(url, fk_user_id, video_name, description, like=0, dislike=0, views=0):
     if video_name == "": 
@@ -61,3 +73,6 @@ def takeDescriptionFromVideo(video_url):
 
 def takeCommentsFromVideo(video_url):
     return Comments.query.filter_by(video_url=video_url).all()
+
+def takeVideosFromUser(user_id):
+    return Videos.query.filter_by(user_id=user_id).all()
