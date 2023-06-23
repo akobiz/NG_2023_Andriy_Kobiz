@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, request, g
+from flask import Flask, render_template, redirect, url_for, session, request, g, jsonify
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 import dbWorker as dbw
 from commands import *
@@ -47,10 +47,21 @@ def upload():
 @app.route('/playback/<string:url>')
 def playback(url):
     poster = 'uploads/' + url + '.jpg'
+    comments = dbw.takeCommentsFromVideo(url)
     url = 'uploads/' + url + '.mp4'
+    print(comments)
     if checkPathIsValid(poster):
-        return render_template('playback.html', url=url, poster=poster)
-    return render_template('playback.html', url=url)
+        return render_template('playback.html', url=url, poster=poster, comments=comments)
+    return render_template('playback.html', url=url, comments=comments)
+
+@app.route('/leaveComment', methods=['POST'])
+def leaveComment():
+    id = request.form['user']
+    url = request.form['url'][8:-4]
+    comment = request.form['comment']
+    print(id, url, comment)
+    dbw.addComment(id, url, comment)
+    return redirect('/playback/' + url)
 
 @app.route('/sign', methods=['GET', 'POST'])
 def sign():
@@ -71,9 +82,10 @@ def registration():
             email = request.form['email']
             psw = request.form['psw']
             psw_check = request.form['psw_check']
+            channel_name = request.form['channel']
 
             if not dbw.checkUserExists(email) and psw == psw_check:
-                dbw.addUser(email, hashPass(psw))
+                dbw.addUser(email, hashPass(psw), channel_name)
             else: print("EXISTS")
             return redirect('/sign')
     return render_template('registration.html')
@@ -84,6 +96,6 @@ def logout():
     return redirect('/')
 
 if __name__ == "__main__":
-    #with app.app_context():
-        #dbw.checkVideos(app.config['UPLOAD_FOLDER'])
+    with app.app_context():
+        dbw.checkVideos(app.config['UPLOAD_FOLDER'])
     app.run(host='0.0.0.0', port=5050)

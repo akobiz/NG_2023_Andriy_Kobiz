@@ -38,7 +38,7 @@ def checkUserExists(email):
     else:
         return False
 
-def addUser(email, password, channel='Andrew'):
+def addUser(email, password, channel):
     db.session.add(Users(email, channel, password))
     db.session.commit()
 
@@ -51,3 +51,10 @@ def addVideo(url, fk_user_id, video_name, like=0, dislike=0, views=0):
 
     db.session.add(Videos(fk_user_id, url, video_name, like, dislike, views))
     db.session.commit()
+
+def addComment(user_id, video_url, comment):
+    db.session.add(Comments(user_id, video_url, comment))
+    db.session.commit()
+
+def takeCommentsFromVideo(video_url):
+    return Comments.query.filter_by(video_url=video_url).all()

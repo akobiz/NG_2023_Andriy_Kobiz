@@ -9,4 +9,27 @@
      poster="{{ url_for('static', filename=poster)}}" {% endif %} width="750px" height="450px">
         <source src="{{ url_for('static', filename=url) }}" type="video/mp4"></source>
     </video>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="comments" style="display: grid; right: inherit;">
+    {% if current_user.is_authenticated %}
+        <form action="/leaveComment" id="form" method="post">
+            <input type="hidden" name="url" id="url" value="{{ url }}">
+            <input type="hidden" name="user" id="user" value="{{ current_user.id }}">
+            <input type="text" name="comment" id="comment" placeholder="type your comment">
+            <button type="submit" name="btn" id="btn">SEND COMMENT</button>
+        </form>
+    {% else %}
+        <a href="/sign">SIGN IN TO LEAVE A COMMENT</a>
+    {% endif %}
+    <div id="commentContainer">
+        {% for comment in comments %}
+            {{ comment.user_id }}
+            {{ comment.comment }}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+</script>
