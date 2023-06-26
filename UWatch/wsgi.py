@@ -28,13 +28,16 @@ def edit(url):
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['descr']
+
         if 'file' in request.files:
             file = request.files['file']
             if file.filename.endswith('.jpg'):
                 file.save(generateVideoPath(app.config["UPLOAD_FOLDER"] + url + '.jpg'))
-            dbw.editVideo(url, name, description)
+
+        dbw.editVideo(url, name, description)
         return redirect('/panel')
-    return render_template('editing.html')
+    
+    return render_template('editing.html', url=url)
 
 @app.route('/panel/delete', methods=['POST'])
 @login_required

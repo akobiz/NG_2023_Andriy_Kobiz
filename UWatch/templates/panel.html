@@ -4,7 +4,7 @@
         <div class="video_manager">
                 <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="75px" height="85px">
                 <h3>{{ video.video_name }}</h3>
-                <form action="/panel/{{ video.video_url }}" method="post">
+                <form action="/panel/{{ video.video_url }}">
                     <input type="hidden" name="url" id="url" value="{{ video.video_url }}">
                     <input type="hidden" name="name" id="name" value="{{ video.video_name }}">
                     <input type="hidden" name="descr" id="descr" value="{{ video.description }}">
