@@ -76,3 +76,14 @@ def takeCommentsFromVideo(video_url):
 
 def takeVideosFromUser(user_id):
     return Videos.query.filter_by(user_id=user_id).all()
+
+def searchVideos(name:str):
+    videos = Videos.query.all()
+    similarVideos = videos.copy()
+    for video in videos:
+        if name.lower() not in video.video_name.lower():
+            similarVideos.remove(video)
+    if len(videos) < 15:
+        return videos, similarVideos
+    else:
+        return videos[:15], similarVideos

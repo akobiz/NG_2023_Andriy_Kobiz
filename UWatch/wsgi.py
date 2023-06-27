@@ -22,6 +22,14 @@ def index():
     randomizeVideos(videos)
     return render_template('index.html', videos=videos)
 
+@app.route('/search')
+def search():
+    searched = str(request.args['srch'])
+    videos, similarVideos = dbw.searchVideos(searched)
+    if len(similarVideos) < 1:
+        return render_template('search.html', videos=videos)
+    return render_template('search.html', videos=videos, similarVideos=similarVideos)
+
 @app.route('/panel/<string:url>', methods=['GET', 'POST'])
 @login_required
 def edit(url):

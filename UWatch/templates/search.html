@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block content %}
+    {% if similarVideos%}
+        {% for video in similarVideos %}
+            <a href="playback/{{ video.video_url }}">
+                <div class="video">
+                        <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="200" height="200">
+                        <h3>{{ video.video_name }}</h3>
+                </div>
+                <hr>
+            </a>
+        {% endfor %}
+    {% else %}
+        <h1>Not found similar video!</h1>
+    {% endif %}
+    <hr>
+    <h1>Try to watch this!</h1>
+    {% for video in videos %}
+        <a href="playback/{{ video.video_url }}">
+            <div class="video">
+                    <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="200" height="200">
+                    <h3>{{ video.video_name }}</h3>
+            </div>
+            <hr>
+        </a>
+    {% endfor %}
+{% endblock %}
