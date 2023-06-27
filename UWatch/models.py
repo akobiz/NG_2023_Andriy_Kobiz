@@ -9,7 +9,7 @@ class Users(UserMixin, db.Model):
     channel_name = db.Column(db.String(45), unique=True)
     password = db.Column(db.String(100))
 
-    #videos = db.relationship('Videos', backref='author', lazy=True)
+    videos = db.relationship('Videos', backref='user', lazy=True)
     #comments = db.relationship('Comments', backref='user', lazy=True)
 
     def __init__(self, email, channel_name, password):
