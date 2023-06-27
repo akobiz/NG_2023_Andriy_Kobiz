@@ -95,12 +95,12 @@ def upload():
 def playback(url):
     poster = 'uploads/' + url + '.jpg'
     comments = dbw.takeCommentsFromVideo(url)
-    description = dbw.takeDescriptionFromVideo(url)
+    video = dbw.takeVideoToWatch(url)
     dbw.addView(url)
     url = 'uploads/' + url + '.mp4'
     if checkPathIsValid(poster):
-        return render_template('playback.html', url=url, poster=poster, comments=comments, description=description.description)
-    return render_template('playback.html', url=url, comments=comments, description=description.description)
+        return render_template('playback.html', url=url, poster=poster, comments=comments, video=video)
+    return render_template('playback.html', url=url, comments=comments, video=video)
 
 @app.route('/leaveComment', methods=['POST'])
 def leaveComment():

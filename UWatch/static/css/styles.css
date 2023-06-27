@@ -133,13 +133,93 @@ select:focus {
   box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
+.video-playback {
+  margin-top: 25px;
+  margin-left: 50px;
+  margin-right: 50px;
+  width: 90%;
+}
+
+.video-info h2,
+.video-info h4,
+.video-info p{
+  margin: 0;
+}
+
+.video-info h5 {
+  opacity: 70%;
+  color: rgb(0, 0, 0);
+  margin: 0;
+}
+
+.video-info{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-items: left;
+}
+
+#sign-comments {
+  position: relative;
+  font-size: large;
+  margin-bottom: 15px;
+  margin-left: 45%;
+}
+
+#sign-comments:hover {
+  color: red;
+}
+
+.comments {
+  margin-top: 0;
+}
+
+#form-comment {
+  margin-bottom: 10px;
+}
+
+#form-comment input {
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+  text-overflow: ellipsis;
+  inline-size: 300px;
+  overflow-wrap: break-word;
+}
+
+#form-comment button {
+  display: flex;
+  all: unset;
+  cursor: pointer;
+  height: 40px;
+  width: 90px;
+}
+
+#form-comment button:hover {
+  color: green;
+}
+
+#form-comment input:focus {
+  border-color: #00a8ff;
+  box-shadow: 0 0 4px #00a8ff;
+}
+
+.comment-container p{
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  overflow-wrap: break-word;
+}
+
 body {
   margin: 0;
   margin-top: 0;
   font-family: system-ui;
 }
 
-input {
+#search-bar input {
   all: unset;
   font: 16px system-ui;
   color: #fff;

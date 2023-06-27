@@ -83,7 +83,7 @@ def addView(video_url):
         record.views = int(record.views) + 1
         db.session.commit()
 
-def takeDescriptionFromVideo(video_url):
+def takeVideoToWatch(video_url):
     return Videos.query.filter_by(video_url=video_url).first()
 
 def takeCommentsFromVideo(video_url):
