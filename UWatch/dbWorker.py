@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from commands import clearNoExistingVideos
+from commands import clearNoExistingVideos, randomizeVideos
 from datetime import datetime
 
 db = SQLAlchemy()
@@ -42,8 +42,13 @@ def addUser(email, password, channel_name):
     db.session.add(Users(email, channel_name, password))
     db.session.commit()
 
-def takeVideos():
-    return Videos.query.all()
+def takeVideos(orderByViews=False):
+    if orderByViews == False:
+        videos = Videos.query.all()
+        randomizeVideos(videos)
+    else:
+        videos = Videos.query.order_by(Videos.views.desc()).all()
+    return videos
 
 def editVideo(video_url, name, description):
     record = Videos.query.filter_by(video_url=video_url).first()
@@ -67,6 +72,16 @@ def addVideo(url, fk_user_id, video_name, description, like=0, dislike=0, views=
 def addComment(user_id, video_url, comment):
     db.session.add(Comments(user_id, video_url, comment, datetime.now().ctime()))
     db.session.commit()
+
+def addView(video_url):
+    record = Videos.query.filter_by(video_url=video_url).first()
+    print('aaa')
+    print(record, record.video_name, record.views)
+
+    if record is not None:
+        print(record.views)
+        record.views = int(record.views) + 1
+        db.session.commit()
 
 def takeDescriptionFromVideo(video_url):
     return Videos.query.filter_by(video_url=video_url).first()

@@ -18,8 +18,13 @@ def user_loader(user_id):
 
 @app.route('/')
 def index():
-    videos = dbw.takeVideos()
-    randomizeVideos(videos)
+    try:
+        if request.args['order-by'] == 'views':
+            videos = dbw.takeVideos(True)
+        else:
+            videos = dbw.takeVideos(False)
+    except:
+        videos = dbw.takeVideos(False)
     return render_template('index.html', videos=videos)
 
 @app.route('/search')
@@ -81,6 +86,7 @@ def upload():
 
             dbw.addVideo(url, video_name=video_name, fk_user_id=current_user.id, description=description)
         return redirect('/')
+    
     elif request.method == 'GET':
         print(current_user.id)
         return render_template('upload.html')
@@ -90,6 +96,7 @@ def playback(url):
     poster = 'uploads/' + url + '.jpg'
     comments = dbw.takeCommentsFromVideo(url)
     description = dbw.takeDescriptionFromVideo(url)
+    dbw.addView(url)
     url = 'uploads/' + url + '.mp4'
     if checkPathIsValid(poster):
         return render_template('playback.html', url=url, poster=poster, comments=comments, description=description.description)

@@ -20,6 +20,36 @@
   -webkit-text-fill-color: transparent;
 }
 
+#nav-sign {
+  position: absolute;
+  top: 50%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.user-nav {
+  position: absolute;
+  top: 50%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+select {
+  font-family: system-ui;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #000;
+  padding: 8px 12px;
+  transition: border-color 0.2s ease, outline 0.2s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: #0000FF;
+}
+
 .search {
   width: 340px;
   position: relative;
@@ -57,6 +87,50 @@
 
 .content-block {
   padding-top: 50px;
+}
+
+.order-buttons {
+  margin-top: 15px;
+  margin-left: 90px;
+  display: flex;
+  opacity: 80%;
+
+}
+
+.order-buttons button {
+  all: unset;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: all 0.3s ease;
+}
+
+.order-buttons button:hover {
+  transform: scale(1.1);
+  color: red;
+}
+
+.video-container {
+  margin-left: 35px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+
+.video {
+  margin: 55px;
+  flex-basis: calc(33.33% - 110px);
+  transition: all 0.3s ease;
+}
+
+.video:hover {
+  transform: scale(1.1);
+}
+
+.video img {
+  border-radius: 5%;
+  box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
 body {

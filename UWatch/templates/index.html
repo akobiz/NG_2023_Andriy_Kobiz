@@ -15,22 +15,41 @@
         </a>
         <div class="search">
             <form id="search-bar" action="/search">
-                <input type="text" name="srch" id="srch" placeholder="Search...">
+                <input type="text" name="srch" id="srch" placeholder="Search..." autocomplete="off">
                 <button type="submit" id="search-button">Search</button>
             </form>
         </div>
+        {% if current_user.is_authenticated %}
+            <div class="user-nav">
+                <select onchange="window.location.href=this.value">
+                    <option value="">Hi, {{current_user.channel_name }}!</option>
+                    <option value="/panel">My videos</option>
+                    <option value="/logout">Logout</option>
+                </select>
+            </div>
+        {% else %}
+            <a href="/sign" id="nav-sign">SIGN IN</a>
+        {% endif %}
     </div>
     <div class="content-block">
         {% block content %}
-        {% for video in videos %}
-            <a href="playback/{{ video.video_url }}">
-                <div class="video">
-                        <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="200" height="200">
-                        <h3>{{ video.video_name }}</h3>
-                </div>
-                <hr>
-            </a>
-        {% endfor %}
+            <div class="order-buttons">
+                <form action="/">
+                    <label>SORT VIDEOS BY: </label>
+                    <button type="submit" name="order-by" id="order-by" value="random">RANDOM</button>
+                    <button type="submit" name="order-by" id="order-by" value="views">VIEWS</button>
+                </form>
+            </div>
+            <div class="video-container">
+            {% for video in videos %}
+                <a href="playback/{{ video.video_url }}">
+                    <div class="video">
+                            <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="200" height="200">
+                            <h3>{{ video.video_name }}</h3>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
         {% endblock %}
     </div>
 </body>
