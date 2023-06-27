@@ -56,7 +56,7 @@ def edit(url):
 @login_required
 def delete():
     if request.form['action'] == 'delete':
-        dbw.deleteVideo(request.form['url'])
+        dbw.deleteVideo(request.form['url'], app.config["UPLOAD_FOLDER"])
     return redirect('/panel')
 
 @app.route('/panel')

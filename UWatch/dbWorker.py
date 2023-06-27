@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from commands import clearNoExistingVideos, randomizeVideos
+from commands import clearNoExistingVideos, randomizeVideos, deleteVideoFromServer
 from datetime import datetime
 
 db = SQLAlchemy()
@@ -58,7 +58,8 @@ def editVideo(video_url, name, description):
         record.description = description
         db.session.commit()
 
-def deleteVideo(video_url):
+def deleteVideo(video_url, path):
+    deleteVideoFromServer(video_url, path)
     db.session.query(Comments).filter_by(video_url=video_url).delete()
     db.session.query(Videos).filter_by(video_url=video_url).delete()
     db.session.commit()

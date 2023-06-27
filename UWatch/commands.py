@@ -56,3 +56,6 @@ def checkPathIsValid(pth):
 
 def randomizeVideos(videos):
     random.shuffle(videos)
+
+def deleteVideoFromServer(video, pth):
+    rm(pth + video + ".mp4")
