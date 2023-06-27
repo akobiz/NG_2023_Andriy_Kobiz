@@ -10,4 +10,4 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_MODELS_IMPORT_PATH = 'models'
     UPLOAD_FOLDER = 'static/uploads/'
-    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+    MAX_CONTENT_LENGTH = 128 * 1024 * 1024
