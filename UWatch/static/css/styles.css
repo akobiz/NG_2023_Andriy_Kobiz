@@ -115,7 +115,6 @@ select:focus {
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-
 }
 
 .video {
@@ -213,10 +212,188 @@ select:focus {
   overflow-wrap: break-word;
 }
 
+.signing {
+  width: 400px;
+  margin-top: 150px;
+  margin-left: 37%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(172, 165, 165);
+  border-radius: 15px;
+  box-shadow: 2px 0px 4px 0px rgb(0, 0, 0, 0.2);
+}
+
+.signing form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-bottom: 15px;
+}
+
+.signing label {
+  margin-top: 20px;
+  align-items: left;
+}
+
+.signing input {
+  padding: 10px;
+  margin: 5px 0;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.signing button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  align-self: center;
+}
+
+.signing button:hover {
+  background-color: #45a049;
+}
+
+.signing a {
+  align-self: center;
+}
+
+.signing a:hover {
+  color: rgb(86, 81, 81);
+}
+
+.video-upload form {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video-upload dl {
+  margin-bottom: 20px;
+}
+
+.video-upload input[type="file"],
+.video-upload input[type="text"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.video-upload input[type="submit"],
+.video-upload button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.video-upload textarea {
+  width: 300px;
+  height: 150px;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.video-upload input[type="submit"]:hover,
+.video-upload button:hover {
+  color: #45a049;
+}
+
+.video-manager {
+  margin-left: 35px;
+  margin-bottom: 25px;
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.video-manager h5 {
+  margin-top: 0;
+  color: grey;
+  opacity: 70%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.video-manager h3 {
+  margin: 0;
+}
+
+.video-info img {
+  align-self: center;
+  border-radius: 5%;
+}
+
+.video-info {
+  margin-top: 15px;
+}
+
+.video-field {
+  background-color: #ccc;
+  margin-left: 35px;
+  width: 400px;
+}
+
+.video-buttons {
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 45px;
+}
+
+.video-buttons button {
+  margin-bottom: 15px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #98bc99;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.video-buttons button:hover {
+  color: #707b7b;
+}
+
+.video-search {
+  align-items: center;
+  margin-left: 40px;
+}
+
+#h1 {
+  margin-left: 40px;
+}
+
+.video-search h4 {
+  margin: 0;
+  color: grey;
+  opacity: 70%;
+}
+
+.video-search img {
+  border-radius: 5%;
+}
+
 body {
   margin: 0;
   margin-top: 0;
   font-family: system-ui;
+  background-color: rgb(236, 232, 232);
 }
 
 #search-bar input {
