@@ -409,3 +409,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.message {
+  background-color: red;
+  border-radius: 5%;
+  margin-top: 1%;
+  margin-left: 1%;
+  display: flex;
+  width: 350px;
+}

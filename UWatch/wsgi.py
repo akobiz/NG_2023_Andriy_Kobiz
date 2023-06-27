@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, request, g, jsonify
+from flask import Flask, render_template, redirect, url_for, session, request, g, jsonify, flash
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 import dbWorker as dbw
 from commands import *
@@ -119,7 +119,10 @@ def sign():
             password = request.form['password']
             if dbw.checkUserExists(email) and checkPassValid(dbw.checkUserPassword(email)[0], password):
                 login_user(dbw.getUser(email))
-        return redirect('/')
+                return redirect('/')
+            else:
+                flash("Email doesn't exists or password are not correct!")
+                return redirect('/sign')
     return render_template('sign.html')
 
 @app.route('/sign/registration', methods=['GET', 'POST'])
@@ -134,9 +137,12 @@ def registration():
 
             if not dbw.checkUserExists(email) and psw == psw_check:
                 dbw.addUser(email, hashPass(psw), channel_name)
-            else: 
-                print("EXISTS")
-            return redirect('/sign')
+                return redirect('/sign')
+            elif dbw.checkUserExists(email):
+                flash("Email is already registered! Try register with other email.")
+            else:
+                flash("The password does not match.")
+            return redirect('/sign/registration')
     return render_template('registration.html')
 
 @app.route('/logout')

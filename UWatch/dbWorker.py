@@ -77,8 +77,6 @@ def addComment(user_id, video_url, comment):
 
 def addView(video_url):
     record = Videos.query.filter_by(video_url=video_url).first()
-    print('aaa')
-    print(record, record.video_name, record.views)
 
     if record is not None:
         print(record.views)
