@@ -59,7 +59,8 @@ def editVideo(video_url, name, description):
         db.session.commit()
 
 def deleteVideo(video_url):
-    db.session.delete(Videos.query.filter_by(video_url=video_url).first())
+    db.session.query(Comments).filter_by(video_url=video_url).delete()
+    db.session.query(Videos).filter_by(video_url=video_url).delete()
     db.session.commit()
 
 def addVideo(url, fk_user_id, video_name, description, like=0, dislike=0, views=0):
@@ -98,6 +99,7 @@ def searchVideos(name:str):
     for video in videos:
         if name.lower() not in video.video_name.lower():
             similarVideos.remove(video)
+    randomizeVideos(videos)
     if len(videos) < 15:
         return videos, similarVideos
     else:
