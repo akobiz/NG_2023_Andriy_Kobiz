@@ -1,9 +1,16 @@
 {% extends "index.html" %}
 {% block content %}
-    <form action="/panel/{{ url }}" method="post">
-        <input type="file" name="poster" autocomplete="off"> <br><br>
-		<input type="text" name="name" id="name" value="{{name}}" placeholder="Enter name of video" required>
-		<input type="text" name="descr" id="descr" value="{{description}}" placeholder="Description to video" height="35px" required>
-        <button type="submit">APPLY CHANGES</button>
-    </form>
+    <div class="video-upload">
+        <form action="/panel/{{ url }}" method="post">
+            <label>Choose new preview(only .jpg format)</label>
+            <input type="file" name="poster" autocomplete="off"> <br><br>
+            <label>New name of the video</label>
+            <input type="text" name="name" id="name" value="{{name}}" placeholder="Enter name of video" required>
+            <label>New description of the video</label>
+            <input type="text" name="descr" id="descr" value="{{description}}" placeholder="Description to video" height="35px" required>
+            <button type="submit">APPLY CHANGES</button>
+            <hr>
+        </form>
+        <hr>
+    </div>
 {% endblock %}

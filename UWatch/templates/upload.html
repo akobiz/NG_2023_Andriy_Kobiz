@@ -1,26 +1,23 @@
 {% extends "index.html" %}
 {% block content %}
-<h2>Select a video to upload</h2>
-<p>
-{% with messages = get_flashed_messages() %}
-	{% if messages %}
-		{% for messages in messages %}
-			{{message}}
-		{% endfor %}
-	{% endif %}
-{% endwith %}
-</p>
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <dl>
+<div class="video-upload">
+	<form action="/upload" method="post" enctype="multipart/form-data">
+		<dl>
+			<h2>Select a video to upload</h2>
+			<p>
+				<label>Select video(only .mp4 format):</label>
+				<input type="file" name="file" autocomplete="off" required> <br>
+				<label>Choose preview for the video(only .jpg format)</label>
+				<input type="file" name="poster" autocomplete="off"> <br><br>
+				<label>Enter name of the video</label>
+				<input type="text" name="name" id="name" placeholder="Enter name of video"> <br>
+				<label>Enter description to this video</label>
+				<textarea type="text" name="descr" id="descr" placeholder="Description to video" height="35px"></textarea>
+			</p>
+		</dl>
 		<p>
-			<input type="file" name="file" autocomplete="off" required> <br>
-			<input type="file" name="poster" autocomplete="off"> <br><br>
-			<input type="text" name="name" id="name" placeholder="Enter name of video">
-			<input type="text" name="descr" id="descr" placeholder="Description to video" height="35px">
+			<input type="submit" value="Upload">
 		</p>
-    </dl>
-    <p>
-		<input type="submit" value="Upload">
-	</p>
-</form>
+	</form>
+</div>
 {% endblock %}

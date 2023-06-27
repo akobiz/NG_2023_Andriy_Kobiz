@@ -1,11 +1,13 @@
 {% extends "index.html" %}
 {% block content %}
     {% if similarVideos%}
+        <h1 id="search-h1">Result:</h1>
         {% for video in similarVideos %}
             <a href="playback/{{ video.video_url }}">
-                <div class="video">
-                        <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="200" height="200">
+                <div class="video-search">
+                        <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="200" height="200"><br>
                         <h3>{{ video.video_name }}</h3>
+                        <h4>Views: {{ video.views }}</h4>
                 </div>
                 <hr>
             </a>
@@ -17,7 +19,7 @@
     <h1>Try to watch this!</h1>
     {% for video in videos %}
         <a href="playback/{{ video.video_url }}">
-            <div class="video">
+            <div class="video-search">
                     <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="200" height="200">
                     <h3>{{ video.video_name }}</h3>
             </div>

@@ -1,9 +1,14 @@
 {% extends "index.html" %}
 {% block content %}
+<div class="video-manager">
     {% for video in videos %}
-        <div class="video_manager">
-                <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="75px" height="85px">
+        <div class="video-field">
+            <div class="video-info">
+                <img src="{{ url_for('static', filename='uploads/' + video.video_url + '.jpg') }}" width="95px" height="105px">
+                <h5>Views: {{ video.views }}</h5>
                 <h3>{{ video.video_name }}</h3>
+            </div>
+            <div class="video-buttons">
                 <form action="/panel/{{ video.video_url }}">
                     <input type="hidden" name="url" id="url" value="{{ video.video_url }}">
                     <input type="hidden" name="name" id="name" value="{{ video.video_name }}">
@@ -14,6 +19,8 @@
                     <input type="hidden" name="url" id="url" value="{{ video.video_url }}">
                     <button type="submit" name="action" id="action" value="delete">DELETE VIDEO</button>
                 </form>
+            </div> <hr>
         </div>
     {% endfor %}
+</div>
 {% endblock %}

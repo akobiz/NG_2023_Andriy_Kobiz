@@ -1,15 +1,23 @@
 {% extends "index.html" %}
 {% block content %} 
-    <form action="" id="form1" method="post">
-        <input type="email" name="email" placeholder="example@example.com">
-        <input type="password" name="psw" placeholder="Type password">
-        <input type="password" name="psw_check" placeholder="Type password again">
-        <button onclick="addInput()" id="continue">CONTINUE</button>
-    </form>
-    <form action="" id="form2" style="display: none;" method="post">
-        <input type="text" name="channel" id="channel" placeholder="Your name of channel">
-        <button type="submit" name="btn" id="btn" value="reg">REGISTER</button>
-    </form>
+    <div class="signing">
+        <form action="" id="form1" method="post">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="example@example.com" required>
+            <label>Password</label>
+            <input type="password" name="psw" placeholder="Type password" required>
+            <label>Password check</label>
+            <input type="password" name="psw_check" placeholder="Type password again" required>
+            <button onclick="addInput()" id="continue">CONTINUE</button><br>
+            <a href="/sign">Already have account? Sign in</a>
+        </form>
+        <form action="" id="form2" style="display: none;" method="post">
+            <label>Channel name</label><br>
+            <input type="text" name="channel" id="channel" placeholder="Your name of channel" required><br>
+            <button type="submit" name="btn" id="btn" value="reg">REGISTER</button><br>
+            <a href="/sign">Already have account? Sign in</a>
+        </form>
+    </div>
 
     <script>
         var submitButton = document.getElementById("continue");
